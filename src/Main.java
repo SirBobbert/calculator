@@ -1,18 +1,30 @@
+import java.util.Scanner;
+
 public class Main {
 
     public static void main(String[] args) {
 
+        Scanner firstEntry = new Scanner(System.in);
+        System.out.println("Please enter the first number: ");
+        int firstEntryInt = firstEntry.nextInt();
 
-        int firstEntry = 10;
-        int secondEntry = 5;
-        String operator = "+";
+        // Scanner bug
+        String str1 = firstEntry.nextLine();
 
-        Calculator calculator = new Calculator(firstEntry, secondEntry, operator);
+
+        Scanner operator = new Scanner(System.in);
+        System.out.println("Enter the operator: ");
+        String operatorString = operator.nextLine();
+
+
+        Scanner secondEntry = new Scanner(System.in);
+        System.out.println("Please enter the second number: ");
+        int secondEntryInt = secondEntry.nextInt();
+
+
+        Calculator calculator = new Calculator(firstEntryInt, secondEntryInt, operatorString);
 
         calculator.getResult();
-
-
-
     }
 
 }
