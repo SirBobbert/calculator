@@ -4,32 +4,28 @@ public class Main {
 
     public static void main(String[] args) {
 
-        boolean isRunning = true;
 
-        while (isRunning) {
+        while (true) {
 
-            Scanner firstEntry = new Scanner(System.in);
-            System.out.println("Please enter the first number: ");
-            int firstEntryInt = firstEntry.nextInt();
+            Scanner scanner = new Scanner(System.in);
 
-            // Scanner bug
-            String str1 = firstEntry.nextLine();
+            System.out.println("First entry:");
+            String firstInput = scanner.nextLine();
+            if (firstInput.equals("q")) break;
+            int firstEntry = Integer.parseInt(firstInput);
 
-            Scanner operator = new Scanner(System.in);
-            System.out.println("Enter the operator: ");
-            String operatorString = operator.nextLine();
+            System.out.println("Enter operation:");
+            String operation = scanner.nextLine();
+            if (operation.equals("q")) break;
 
-            Scanner secondEntry = new Scanner(System.in);
-            System.out.println("Please enter the second number: ");
-            int secondEntryInt = secondEntry.nextInt();
+            System.out.println("Second entry:");
+            String secondInput = scanner.nextLine();
+            if (secondInput.equals("q")) break;
+            int secondEntry = Integer.parseInt(secondInput);
 
-            Calculator calculator = new Calculator(firstEntryInt, secondEntryInt, operatorString);
+            Calculator calculator = new Calculator(firstEntry, secondEntry, operation);
 
             System.out.println(calculator.getResult());
-
-            if (operatorString.equals("q")) {
-                isRunning = false;
-            }
         }
     }
 }
