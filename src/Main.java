@@ -1,31 +1,48 @@
 import java.util.Scanner;
+import java.util.Set;
 
 public class Main {
+    private static final Set<String> ALLOWED =
+            Set.of(iOperations.PLUS, iOperations.MINUS, iOperations.MULTIPLY,
+                    iOperations.DIVIDE, iOperations.SQRT, iOperations.POW);
 
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
+//        TODO: Split input with regex so it's more dynamic
+//        String listOfInputs = scanner.nextLine();
+//        System.out.println(listOfInputs);
 
         while (true) {
+            try {
+                System.out.println("First entry:");
+                String firstInput = scanner.nextLine().trim();
+                if (firstInput.equalsIgnoreCase("q")) break;
+                double first = Double.parseDouble(firstInput);
 
-            Scanner scanner = new Scanner(System.in);
+                System.out.println("Enter operation (+, -, *, /, sqrt, **):");
+                String op = scanner.nextLine().trim();
+                if (op.equalsIgnoreCase("q")) break;
+                if (!ALLOWED.contains(op)) {
+                    System.out.println("Unknown operation. Use +, -, *, /, sqrt, **.");
+                    continue;
+                }
 
-            System.out.println("First entry:");
-            String firstInput = scanner.nextLine();
-            if (firstInput.equals("q")) break;
-            int firstEntry = Integer.parseInt(firstInput);
+                double second = 0;
+                if (!op.equals(iOperations.SQRT)) {
+                    System.out.println("Second entry:");
+                    String secondInput = scanner.nextLine().trim();
+                    if (secondInput.equalsIgnoreCase("q")) break;
+                    second = Double.parseDouble(secondInput);
+                }
 
-            System.out.println("Enter operation:");
-            String operation = scanner.nextLine();
-            if (operation.equals("q")) break;
+                Calculator calc = new Calculator(first, second, op);
+                System.out.println("Result = " + calc.getResult());
 
-            System.out.println("Second entry:");
-            String secondInput = scanner.nextLine();
-            if (secondInput.equals("q")) break;
-            int secondEntry = Integer.parseInt(secondInput);
-
-            Calculator calculator = new Calculator(firstEntry, secondEntry, operation);
-
-            System.out.println(calculator.getResult());
+            } catch (NumberFormatException e) {
+                System.out.println("Ugyldigt tal, prøv igen.");
+            }
         }
+        scanner.close();
     }
 }

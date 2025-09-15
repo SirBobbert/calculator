@@ -1,62 +1,26 @@
 public class Calculator {
+    private final double first;
+    private final double second;
+    private final String operator;
 
-    private int firstEntry;
-    private int secondEntry;
-    private String operator;
-
-    public Calculator(int firstEntry, int secondEntry, String operator) {
-        this.firstEntry = firstEntry;
-        this.secondEntry = secondEntry;
+    public Calculator(double first, double second, String operator) {
+        this.first = first;
+        this.second = second;
         this.operator = operator;
     }
 
-    public int getResult() {
-        
-        return switch (this.operator) {
-            case "+" -> firstEntry + secondEntry;
-            case "-" -> firstEntry - secondEntry;
-            case "*" -> firstEntry * secondEntry;
-            case "/" -> {
-                if (secondEntry == 0) {
-                    throw new IllegalArgumentException("Division with 0 is impossible");
-                }
-                yield firstEntry / secondEntry;
+    public double getResult() {
+        return switch (operator) {
+            case iOperations.PLUS -> first + second;
+            case iOperations.MINUS -> first - second;
+            case iOperations.MULTIPLY -> first * second;
+            case iOperations.DIVIDE -> {
+                if (second == 0) throw new IllegalArgumentException("Division with 0 is impossible");
+                yield first / second;
             }
+            case iOperations.SQRT -> Math.sqrt(first);
+            case iOperations.POW -> Math.pow(first, second);
             default -> throw new UnsupportedOperationException("Unknown operator: " + operator);
         };
-    }
-
-
-    @Override
-    public String toString() {
-        return "Calculator{" +
-                "firstEntry=" + firstEntry +
-                ", secondEntry=" + secondEntry +
-                ", operator='" + operator + '\'' +
-                '}';
-    }
-
-    public int getFirstEntry() {
-        return firstEntry;
-    }
-
-    public void setFirstEntry(int firstEntry) {
-        this.firstEntry = firstEntry;
-    }
-
-    public int getSecondEntry() {
-        return secondEntry;
-    }
-
-    public void setSecondEntry(int secondEntry) {
-        this.secondEntry = secondEntry;
-    }
-
-    public String getOperator() {
-        return operator;
-    }
-
-    public void setOperator(String operator) {
-        this.operator = operator;
     }
 }
