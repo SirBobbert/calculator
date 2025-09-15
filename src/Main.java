@@ -6,33 +6,30 @@ public class Main {
 
         boolean isRunning = true;
 
-        while(isRunning) {
+        while (isRunning) {
 
-        Scanner firstEntry = new Scanner(System.in);
-        System.out.println("Please enter the first number: ");
-        int firstEntryInt = firstEntry.nextInt();
+            Scanner firstEntry = new Scanner(System.in);
+            System.out.println("Please enter the first number: ");
+            int firstEntryInt = firstEntry.nextInt();
 
-        // Scanner bug
-        String str1 = firstEntry.nextLine();
+            // Scanner bug
+            String str1 = firstEntry.nextLine();
 
+            Scanner operator = new Scanner(System.in);
+            System.out.println("Enter the operator: ");
+            String operatorString = operator.nextLine();
 
-        Scanner operator = new Scanner(System.in);
-        System.out.println("Enter the operator: ");
-        String operatorString = operator.nextLine();
+            Scanner secondEntry = new Scanner(System.in);
+            System.out.println("Please enter the second number: ");
+            int secondEntryInt = secondEntry.nextInt();
 
+            Calculator calculator = new Calculator(firstEntryInt, secondEntryInt, operatorString);
 
-        Scanner secondEntry = new Scanner(System.in);
-        System.out.println("Please enter the second number: ");
-        int secondEntryInt = secondEntry.nextInt();
+            System.out.println(calculator.getResult());
 
-
-        Calculator calculator = new Calculator(firstEntryInt, secondEntryInt, operatorString);
-
-        calculator.getResult();
-
-        if (operatorString.equals("q")){
-            break;
-        }
+            if (operatorString.equals("q")) {
+                isRunning = false;
+            }
         }
     }
 }

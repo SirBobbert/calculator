@@ -1,6 +1,6 @@
 public class Calculator {
 
-    private int  firstEntry;
+    private int firstEntry;
     private int secondEntry;
     private String operator;
 
@@ -10,25 +10,22 @@ public class Calculator {
         this.operator = operator;
     }
 
-    public int getResult(){
-
-        int res = 0;
-
-        if (operator.equals("/") && this.secondEntry != 0){
-
-            res = switch (this.operator) {
-                case "+" -> firstEntry + secondEntry;
-                case "-" -> firstEntry - secondEntry;
-                case "*" -> firstEntry * secondEntry;
-                case "/" -> firstEntry / secondEntry;
-                default -> 0;
-            };
-
-        System.out.println(res);
-
-        }
-        return res;
+    public int getResult() {
+        
+        return switch (this.operator) {
+            case "+" -> firstEntry + secondEntry;
+            case "-" -> firstEntry - secondEntry;
+            case "*" -> firstEntry * secondEntry;
+            case "/" -> {
+                if (secondEntry == 0) {
+                    throw new IllegalArgumentException("Division with 0 is impossible");
+                }
+                yield firstEntry / secondEntry;
+            }
+            default -> throw new UnsupportedOperationException("Unknown operator: " + operator);
+        };
     }
+
 
     @Override
     public String toString() {
