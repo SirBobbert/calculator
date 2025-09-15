@@ -4,6 +4,10 @@ public class Main {
 
     public static void main(String[] args) {
 
+        boolean isRunning = true;
+
+        while(isRunning) {
+
         Scanner firstEntry = new Scanner(System.in);
         System.out.println("Please enter the first number: ");
         int firstEntryInt = firstEntry.nextInt();
@@ -25,6 +29,10 @@ public class Main {
         Calculator calculator = new Calculator(firstEntryInt, secondEntryInt, operatorString);
 
         calculator.getResult();
-    }
 
+        if (operatorString.equals("q")){
+            break;
+        }
+        }
+    }
 }

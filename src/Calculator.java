@@ -1,5 +1,3 @@
-import java.security.spec.RSAOtherPrimeInfo;
-
 public class Calculator {
 
     private int  firstEntry;
@@ -14,25 +12,21 @@ public class Calculator {
 
     public int getResult(){
 
-        int res;
+        int res = 0;
 
-        switch (this.operator){
+        if (operator.equals("/") && this.secondEntry != 0){
 
-            case "+": res = firstEntry + secondEntry;
-            break;
-            case "-": res = firstEntry - secondEntry;
-            break;
-            case "*": res = firstEntry * secondEntry;
-            break;
-            case "/": res = firstEntry / secondEntry;
-            break;
-            default: res = 0;
-            break;
-        }
+            res = switch (this.operator) {
+                case "+" -> firstEntry + secondEntry;
+                case "-" -> firstEntry - secondEntry;
+                case "*" -> firstEntry * secondEntry;
+                case "/" -> firstEntry / secondEntry;
+                default -> 0;
+            };
 
         System.out.println(res);
 
-        // not returning?
+        }
         return res;
     }
 
