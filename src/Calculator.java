@@ -1,4 +1,6 @@
-public class Calculator {
+import java.util.InputMismatchException;
+
+public class Calculator implements iOperations {
     private final double first;
     private final double second;
     private final String operator;
@@ -11,16 +13,44 @@ public class Calculator {
 
     public double getResult() {
         return switch (operator) {
-            case iOperations.PLUS -> first + second;
-            case iOperations.MINUS -> first - second;
-            case iOperations.MULTIPLY -> first * second;
-            case iOperations.DIVIDE -> {
-                if (second == 0) throw new IllegalArgumentException("Division with 0 is impossible");
-                yield first / second;
-            }
-            case iOperations.SQRT -> Math.sqrt(first);
-            case iOperations.POW -> Math.pow(first, second);
+            case iOperations.PLUS -> add(first, second);
+            case iOperations.MINUS -> sub(first, second);
+            case iOperations.MULTIPLY -> mul(first, second);
+            case iOperations.DIVIDE -> div(first, second);
+            case iOperations.SQRT -> sqrt(first);
+            case iOperations.POW -> pow(first, second);
             default -> throw new UnsupportedOperationException("Unknown operator: " + operator);
         };
+    }
+
+    @Override
+    public double add(double a, double b) {
+        return a + b;
+    }
+
+    @Override
+    public double sub(double a, double b) {
+        return a - b;
+    }
+
+    @Override
+    public double mul(double a, double b) {
+        return a * b;
+    }
+
+    @Override
+    public double div(double a, double b) {
+        if (b == 0) throw new InputMismatchException();
+        return a / b;
+    }
+
+    @Override
+    public double sqrt(double a) {
+        return Math.sqrt(a);
+    }
+
+    @Override
+    public double pow(double a, double b) {
+        return Math.pow(a, b);
     }
 }

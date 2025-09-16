@@ -1,48 +1,44 @@
 import java.util.Scanner;
-import java.util.Set;
 
 public class Main {
-    private static final Set<String> ALLOWED =
-            Set.of(iOperations.PLUS, iOperations.MINUS, iOperations.MULTIPLY,
-                    iOperations.DIVIDE, iOperations.SQRT, iOperations.POW);
-
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
 
-//        TODO: Split input with regex so it's more dynamic
-//        String listOfInputs = scanner.nextLine();
-//        System.out.println(listOfInputs);
+        Scanner scanner = new Scanner(System.in);
 
         while (true) {
             try {
-                System.out.println("First entry:");
-                String firstInput = scanner.nextLine().trim();
-                if (firstInput.equalsIgnoreCase("q")) break;
-                double first = Double.parseDouble(firstInput);
+                System.out.println("Make your calculation here:");
+                String listOfInputs = scanner.nextLine();
 
-                System.out.println("Enter operation (+, -, *, /, sqrt, **):");
-                String op = scanner.nextLine().trim();
-                if (op.equalsIgnoreCase("q")) break;
-                if (!ALLOWED.contains(op)) {
-                    System.out.println("Unknown operation. Use +, -, *, /, sqrt, **.");
+                // checks for q to shut down
+                if (listOfInputs.contains("q") && !listOfInputs.contains("sqrt")) {
+                    System.out.println("Shutting down...");
+                    break;
+                }
+
+                // regex
+                String[] data = listOfInputs.split("(?=(sqrt|pow|[+\\-*/]))|(?<=(sqrt|pow|[+\\-*/]))");
+
+
+                // checks if the first input contains sqrt
+                if (data[0].contains("sqrt")) {
+                    double x = Double.parseDouble(data[1]);
+                    Calculator calc = new Calculator(x, 0, data[0]);
+                    System.out.println(calc.getResult());
                     continue;
                 }
 
-                double second = 0;
-                if (!op.equals(iOperations.SQRT)) {
-                    System.out.println("Second entry:");
-                    String secondInput = scanner.nextLine().trim();
-                    if (secondInput.equalsIgnoreCase("q")) break;
-                    second = Double.parseDouble(secondInput);
-                }
+                // setting variables up
+                double first = Double.parseDouble(data[0]);
+                double second = Double.parseDouble(data[2]);
+                String operator = data[1];
 
-                Calculator calc = new Calculator(first, second, op);
-                System.out.println("Result = " + calc.getResult());
+                Calculator calc = new Calculator(first, second, operator);
+                System.out.println(calc.getResult());
 
             } catch (NumberFormatException e) {
-                System.out.println("Ugyldigt tal, prøv igen.");
+                System.out.println("Invalid input - try again!");
             }
         }
-        scanner.close();
     }
 }
