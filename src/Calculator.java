@@ -40,8 +40,12 @@ public class Calculator implements iOperations {
 
     @Override
     public double div(double a, double b) {
-        if (b == 0) throw new InputMismatchException();
-        return a / b;
+        try {
+            if (b == 0) throw new InputMismatchException();
+            return a / b;
+        } catch (InputMismatchException e) {
+            throw new InputMismatchException();
+        }
     }
 
     @Override

@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -7,7 +8,7 @@ public class Main {
 
         while (true) {
             try {
-                System.out.println("Make your calculation here:");
+                System.out.println("Make your calculation here >>>");
                 String listOfInputs = scanner.nextLine();
 
                 // checks for q to shut down
@@ -36,9 +37,11 @@ public class Main {
                 Calculator calc = new Calculator(first, second, operator);
                 System.out.println(calc.getResult());
 
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid input - try again!");
+            } catch (Exception e) {
+                e.printStackTrace();
+                System.out.println("Try again!");
             }
         }
+
     }
 }
