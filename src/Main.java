@@ -26,7 +26,6 @@ public class Main {
                 // regex
                 String[] data = listOfInputs.split("(?=(sqrt|pow|[+\\-*/]))|(?<=(sqrt|pow|[+\\-*/]))");
 
-
                 // checks if the first input contains sqrt
                 if (data[0].contains("sqrt")) {
                     double x = Double.parseDouble(data[1]);
@@ -48,6 +47,5 @@ public class Main {
                 System.out.println("Type 'help' for a list of commands.");
             }
         }
-
     }
 }

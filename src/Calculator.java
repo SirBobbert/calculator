@@ -1,25 +1,24 @@
 import java.util.InputMismatchException;
 
-public class Calculator implements iOperations {
+public class Calculator implements CalcFunctions {
     private final double first;
     private final double second;
-    private final String operator;
+    private final Operations op;
 
     public Calculator(double first, double second, String operator) {
         this.first = first;
         this.second = second;
-        this.operator = operator;
+        this.op = Operations.fromSymbol(operator);
     }
 
     public double getResult() {
-        return switch (operator) {
-            case iOperations.PLUS -> add(first, second);
-            case iOperations.MINUS -> sub(first, second);
-            case iOperations.MULTIPLY -> mul(first, second);
-            case iOperations.DIVIDE -> div(first, second);
-            case iOperations.SQRT -> sqrt(first);
-            case iOperations.POW -> pow(first, second);
-            default -> throw new UnsupportedOperationException("Unknown operator: " + operator);
+        return switch (op) {
+            case PLUS -> add(first, second);
+            case MINUS -> sub(first, second);
+            case MULTIPLY -> mul(first, second);
+            case DIVIDE -> div(first, second);
+            case SQRT -> sqrt(first);
+            case POW -> pow(first, second);
         };
     }
 
