@@ -1,4 +1,3 @@
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -10,6 +9,13 @@ public class Main {
             try {
                 System.out.println("Make your calculation here >>>");
                 String listOfInputs = scanner.nextLine();
+
+                if (listOfInputs.contains("help")) {
+                    System.out.println("Available commands:");
+                    System.out.println("+ - / * sqrt pow");
+                    System.out.println("Example: 10+10, sqrt25 or 2pow2");
+                    continue;
+                }
 
                 // checks for q to shut down
                 if (listOfInputs.contains("q") && !listOfInputs.contains("sqrt")) {
@@ -38,8 +44,8 @@ public class Main {
                 System.out.println(calc.getResult());
 
             } catch (Exception e) {
-                e.printStackTrace();
-                System.out.println("Try again!");
+                System.out.println("Error, invalid input!");
+                System.out.println("Type 'help' for a list of commands.");
             }
         }
 
